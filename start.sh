@@ -24,19 +24,21 @@ hf download "Moinator/qwen30b-l4-bundle" --repo-type dataset --include "*" --loc
 
 echo "[3.5/6] Fixing permissions..."
 
-chmod +x /opt/qwen/build/bin/llama-server || true
+chmod +x /opt/qwen/bin/llama-server || true
 
 echo "[4/6] Creating launcher..."
 
 cat >/opt/qwen/run.sh <<'EOF'
 #!/bin/bash
 
-exec /opt/qwen/build/bin/llama-server 
--m /opt/qwen/Qwen30B/Qwen3VL-30B-A3B-Instruct-Q4_K_M.gguf 
---mmproj /opt/qwen/Qwen30B/mmproj-Qwen3VL-30B-A3B-Instruct-F16.gguf 
--ngl 999 
---host 0.0.0.0 
---port 8080
+export LD_LIBRARY_PATH=/opt/qwen/bin:$LD_LIBRARY_PATH
+
+exec /opt/qwen/bin/llama-server \
+  -m /opt/qwen/Qwen30B/Qwen3VL-30B-A3B-Instruct-Q4_K_M.gguf \
+  --mmproj /opt/qwen/Qwen30B/mmproj-Qwen3VL-30B-A3B-Instruct-F16.gguf \
+  -ngl 999 \
+  --host 0.0.0.0 \
+  --port 8080
 EOF
 
 chmod +x /opt/qwen/run.sh
