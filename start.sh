@@ -36,7 +36,6 @@ exec /opt/qwen/build/bin/llama-server \
   --host 0.0.0.0 \
   --port 8080
 EOF
-EOF
 
 chmod +x /opt/qwen/run.sh
 
