@@ -6,7 +6,6 @@ HF_TOKEN=""
 REPO="Moinator/qwen30b-l4-bundle"
 
 echo "Installing dependencies..."
-apt update
 apt install -y python3-pip
 
 pip install -U huggingface_hub
